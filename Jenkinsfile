@@ -4,43 +4,49 @@ node {
    sh 'npm --version'
    
    stage("Checkout Source"){
-       checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/akilans/openshift-node-backend.git']]])
+       checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/akilans/ms-node-app.git']]])
    }
    
    stage("Install Dependencies"){
         sh 'npm install'
    }
    
+   /*
    stage("Code Quality"){
         sh 'npm run lint'
         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '', reportFiles: 'quality.html', reportName: 'Quality Report', reportTitles: ''])
    }
+   */
    
    stage("Unit Test"){
         sh 'npm run test'
-        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'coverage', reportFiles: 'index.html', reportName: 'Coverage Report', reportTitles: ''])
+        //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'coverage', reportFiles: 'index.html', reportName: 'Coverage Report', reportTitles: ''])
    }
 
    stage("Dev - Building Application"){
-        openshiftBuild(buildConfig: 'node-backend-app',showBuildLogs: 'true')
+        openshiftBuild(buildConfig: 'front-end',showBuildLogs: 'true')
    }
 
    stage("Dev - Deploying Application"){
-       openshiftDeploy(deploymentConfig: 'node-backend-app')
+       openshiftDeploy(deploymentConfig: 'front-end')
    }
    
    stage("Verify Application"){
-       openshiftVerifyService(svcName: 'node-backend-app')
+       openshiftVerifyService(svcName: 'front-end')
    }
    
-   stage("Functional Testinig"){
+   /*
+   stage("Functional Testing"){
         sh 'python functionalTest.py'   
    }
+   */
       
    stage("Load Testing"){
-         sh 'artillery run perfTest.yml --output load-test.json && artillery report load-test.json --output load-test-result.html'
+         sh 'artillery run perfTest.yml'
+         //sh 'artillery run perfTest.yml --output load-test.json && artillery report load-test.json --output load-test-result.html'
    }
-   
+ 
+   /*
    stage("Publish Report"){
       
      
@@ -49,6 +55,7 @@ node {
       
       publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '', reportFiles: 'load-test-result.html', reportName: 'Load Test report', reportTitles: ''])
    }
+   */
    
    
    /*          
