@@ -40,6 +40,10 @@ node {
        openshiftVerifyService(svcName: 'front-end')
    }
    
+   stage(Tagging Image for Production"){
+      openshiftTag(srcStream: 'front-end', srcTag: 'latest', destStream: 'front-end', destTag: 'prod')
+   }
+   
    /*
    stage("Functional Testing"){
         sh 'python functionalTest.py'   
@@ -63,20 +67,19 @@ node {
    */
    
    
-   /*          
+          
    
    stage('Deploy to Production approval'){
       input "Deploy to prod?"
    }
-   
+   /*
    stage("Prod - Building Application"){
         openshiftBuild(namespace:'prod-coe-mern-stack', buildConfig: 'node-backend-app',showBuildLogs: 'true')
    }
+   */
 
    stage("Prod - Deploying Application"){
-       openshiftDeploy(namespace:'prod-coe-mern-stack', deploymentConfig: 'node-backend-app')
+       openshiftDeploy(namespace:'pipeline-lee0-prod', deploymentConfig: 'front-end')
    }
-
-   */
 
 }
