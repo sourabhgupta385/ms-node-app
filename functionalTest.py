@@ -17,15 +17,16 @@ def testResult(count,description,expected_value,actual_value):
 
 # Test case 1 - Testing version URL
 test_count = test_count+1
-description = "/api url should return 200 status code"
+description = "/cart url should return 200 status code"
 conn = httplib.HTTPConnection(HOST_NAME,PORT)
-conn.request("GET","/api")
+conn.request("GET","/cart")
 response = conn.getresponse()
 result_content = testResult(test_count,description,200,response.status)
 table_content = table_content + result_content
 conn.close()
 
 # Test case 2 - Testing version URL
+'''
 test_count = test_count+1
 description = "/api url should return name & version info"
 conn = httplib.HTTPConnection(HOST_NAME,PORT)
@@ -40,12 +41,13 @@ json_response = json.loads(response_content)
 result_content = testResult(test_count,description,set(expected_value),set(json_response.keys()))
 table_content = table_content + result_content
 conn.close()
+''''
 
 # Test case 3 - Testing version URL
 test_count = test_count+1
-description = "/api/getEmployees url should return 200 status code"
+description = "/catalogue?size=5 url should return 200 status code"
 conn = httplib.HTTPConnection(HOST_NAME,PORT)
-conn.request("GET","/api/getEmployees")
+conn.request("GET","/catalogue?size=5")
 response = conn.getresponse()
 result_content = testResult(test_count,description,200,response.status)
 table_content = table_content + result_content
