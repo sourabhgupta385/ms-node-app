@@ -41,7 +41,7 @@ json_response = json.loads(response_content)
 result_content = testResult(test_count,description,set(expected_value),set(json_response.keys()))
 table_content = table_content + result_content
 conn.close()
-''''
+'''
 
 # Test case 3 - Testing version URL
 test_count = test_count+1
