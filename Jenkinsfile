@@ -44,11 +44,11 @@ node {
       openshiftTag(srcStream: 'front-end', srcTag: 'latest', destStream: 'front-end', destTag: 'prod')
    }
    
-   /*
+   
    stage("Functional Testing"){
         sh 'python functionalTest.py'   
    }
-   */
+   
       
    stage("Load Testing"){
          sh 'artillery run perfTest.yml'
