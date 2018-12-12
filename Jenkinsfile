@@ -22,6 +22,11 @@ node {
         sh 'npm run test'
         //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'coverage', reportFiles: 'index.html', reportName: 'Coverage Report', reportTitles: ''])
    }
+   
+    stage("Code Coverage"){
+        sh 'npm run coverage'
+        //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'coverage', reportFiles: 'index.html', reportName: 'Coverage Report', reportTitles: ''])
+   }
 
    stage("Dev - Building Application"){
         openshiftBuild(buildConfig: 'front-end',showBuildLogs: 'true')
