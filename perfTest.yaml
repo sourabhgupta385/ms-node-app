@@ -1,5 +1,5 @@
 config:
-  target: 'http://front-end'
+  target: 'http://front-end:8079'
   phases:
     - duration: 10
       arrivalRate: 20
