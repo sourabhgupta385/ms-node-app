@@ -40,7 +40,7 @@ node {
        openshiftVerifyService(svcName: 'front-end')
    }
    
-   stage(Tagging Image for Production"){
+   stage("Tagging Image for Production"){
       openshiftTag(srcStream: 'front-end', srcTag: 'latest', destStream: 'front-end', destTag: 'prod')
    }
    
