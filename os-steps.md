@@ -19,3 +19,19 @@
   * oc tag front-end:latest front-end:prod - Tag the image for production Deployment
   * oc new-app ms-qa/front-end:prod --name=front-end -n ms-prod
   * oc new-app https://github.com/akilans/ms-node-app.git --strategy=pipeline --name=front-end-pipeline
+
+# Deploy Remaining services from Image
+ 
+  * oc new-app weaveworksdemos/catalogue:0.3.5 --name=catalogue
+  * oc new-app weaveworksdemos/catalogue-db:0.3.0 --env MYSQL_ROOT_PASSWORD=root MYSQL_ALLOW_EMPTY_PASSWORD=true MYSQL_DATABASE=socksdb --name=catalogue-db
+  * oc new-app weaveworksdemos/carts:0.4.8 --env JAVA_OPTS="-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false" --name=carts
+  * oc new-app mongo:3.4 --name=carts-db
+  * oc new-app weaveworksdemos/orders:0.4.7 --env JAVA_OPTS="-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false" --name=orders
+  * oc new-app mongo:3.4 --name=orders-db
+  * oc new-app weaveworksdemos/shipping:0.4.8 --env JAVA_OPTS="-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false" --name=shipping
+  * oc new-app weaveworksdemos/queue-master:0.3.1 --name=queue-master
+  * oc new-app rabbitmq:3.6.8 --name=rabbitmq
+  * oc new-app weaveworksdemos/payment:0.4.3 --name=payment
+  * oc new-app weaveworksdemos/user:0.4.4 --env MONGO_HOST=user-db:27017 --name=user
+  * oc new-app weaveworksdemos/user-db:0.4.0 --name=user-db
+  * oc new-app weaveworksdemos/load-test:0.1.1 --name=user-sim
