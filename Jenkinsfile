@@ -11,12 +11,13 @@ node {
         sh 'npm install'
    }
    
-   /*
+   
    stage("Code Quality"){
         sh 'npm run lint'
         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '', reportFiles: 'quality.html', reportName: 'Quality Report', reportTitles: ''])
+        sh 'npm run lint-console'
    }
-   */
+   
    
    stage("Unit Test"){
         sh 'npm run test'
