@@ -80,7 +80,7 @@ node {
    */
 
    stage("Prod - Deploying Application"){
-       openshiftDeploy(namespace:'ms-prod', deploymentConfig: 'front-end')
+       openshiftDeploy(namespace:'openshiftplus-prod', deploymentConfig: 'front-end')
    }
 
 }
