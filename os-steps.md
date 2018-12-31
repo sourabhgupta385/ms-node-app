@@ -27,6 +27,7 @@
   * oc tag orders:0.4.7 orders:prod
   * oc new-app openshiftplus-dev/orders:prod --name=orders -n openshiftplus-prod
   * oc expose dc/orders --port=80 -n openshiftplus-prod
+  * oc new-build . --strategy=docker --name=orders --context-dir=docker/orders
   * oc new-app https://github.com/akilans/ms-orders.git --strategy=pipeline --name=orders-pipeline
 
 # Deploy Remaining services from Image
