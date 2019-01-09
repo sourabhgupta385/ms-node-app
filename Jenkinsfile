@@ -4,7 +4,7 @@ node {
    sh 'npm --version'
    
    stage("Checkout Source"){
-       checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/akilans/ms-node-app.git']]])
+       checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/sourabhgupta385/ms-node-app.git']]])
    }
    
    stage("Install Dependencies"){
@@ -80,7 +80,7 @@ node {
    */
 
    stage("Prod - Deploying Application"){
-       openshiftDeploy(namespace:'openshiftplus-prod', deploymentConfig: 'front-end')
+       openshiftDeploy(namespace:'ms-prod-sourabh', deploymentConfig: 'front-end')
    }
 
 }
